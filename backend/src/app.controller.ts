@@ -6,10 +6,12 @@ import {
   Body,
   Put,
   Delete,
+  Res,
 } from '@nestjs/common';
 import { UsersService } from './user/user.service';
 import { PostsService } from './post/post.service';
 import { User as UserModel, Post as PostModel } from 'generated/prisma';
+import { Response } from 'express';
 
 @Controller()
 export class AppController {
@@ -80,5 +82,10 @@ export class AppController {
   @Delete('post/:id')
   async deletePost(@Param('id') id: string): Promise<PostModel> {
     return this.postService.deletePost({ id: Number(id) });
+  }
+
+  @Get('excel')
+  async downloadExcel(@Res() res: Response) {
+    await this.postService.streamPostsToExcel(res);
   }
 }
