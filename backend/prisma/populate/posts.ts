@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../generated/prisma';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -14,7 +14,7 @@ async function main() {
   });
 
   const BATCH_SIZE = 1000;
-  const TOTAL_POSTS = 20000;
+  const TOTAL_POSTS = 500000;
 
   for (let i = 0; i < TOTAL_POSTS; i += BATCH_SIZE) {
     const data = Array.from({ length: BATCH_SIZE }, (_, idx) => ({
