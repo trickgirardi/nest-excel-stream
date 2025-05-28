@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
-import { Post, Prisma } from 'generated/prisma';
+import { PrismaService } from '../prisma/prisma.service';
+import { Post, Prisma } from '@prisma/client';
 import * as ExcelJS from 'exceljs';
 import { Response } from 'express';
 
@@ -81,13 +81,15 @@ export class PostsService {
       if (posts.length === 0) break;
 
       posts.forEach((post) => {
-        worksheet.addRow([
-          post.id,
-          post.title,
-          post.content,
-          post.published,
-          post.authorId,
-        ]);
+        worksheet
+          .addRow([
+            post.id,
+            post.title,
+            post.content,
+            post.published,
+            post.authorId,
+          ])
+          .commit();
       });
 
       lastId = posts[posts.length - 1].id;
