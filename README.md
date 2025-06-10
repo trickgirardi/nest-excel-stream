@@ -13,6 +13,7 @@ Streaming large datasets is a challenge in many web frameworks and ORMs, as most
 - **ExcelJS** for streaming Excel file generation
 - **Frontend** (Next.js/React) for triggering and downloading the Excel file in real time
 - **Docker Compose** for easy database setup
+- **Prisma Raw Typed SQL** for type safety and efficient querying
 
 ## How it works
 
@@ -41,6 +42,7 @@ Set your `DATABASE_URL` in `.env` (see `docker-compose.yml` for credentials), th
 ```bash
 npx prisma migrate dev
 npx prisma generate
+npx prisma generate --sql
 ```
 
 ### 4. Seed the database (optional)
